@@ -1,41 +1,57 @@
 package UITests;
 
-import com.codeborne.selenide.Screenshots;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import com.google.common.io.Files;
-import io.qameta.allure.Attachment;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import base.BaseTest;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import pages.*;
 
-import java.io.File;
-import java.io.IOException;
-
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.clearBrowserCookies;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
+import static core.utils.ConfigUtils.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class UITests {
+public class UITests extends BaseTest {
 
-    @BeforeSuite
-    public void setUp() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+    private String repoName = "Test";
+    private LoginPage loginPage;
+    private MainPage mainPage;
+    private CreateRepoPage createRepoPage;
+    private NewCreatedRepoPage newCreatedRepoPage;
+    private RepoPage repoPage;
+    private SettingsPage settingsPage;
+
+    @BeforeMethod
+    public void clearUp() {
+        clearBrowserCookies();
+        clearBrowserCache();
     }
 
-    @Test
+    @Test(description = "Verify Home page is opened.")
     public void loginTest() {
-        open("https://google.com");
+        loginPage = open("/login", LoginPage.class);
+        mainPage = loginPage.logIn(email, pass);
+        assertThat(mainPage.isElementVisible()).as("Cannot login into the account.").isTrue();
     }
 
-    @AfterSuite
-    public void tearDown() throws IOException {
-        screenshot();
+    @Test(description = "Verify creating new repository.", priority = 1)
+    public void creatingRepoTest() {
+        loginPage = open("/login", LoginPage.class);
+        mainPage = loginPage.logIn(email, pass);
+        createRepoPage = mainPage.clickCreateNewRepoBtn();
+        newCreatedRepoPage = createRepoPage.createNewRepoByUI(repoName + uniqueId);
+        assertThat(newCreatedRepoPage.checkCreatedRepoName(repoName + uniqueId)).as("Repo name isn't the same").isTrue();
     }
 
-    @Attachment(type = "image/png")
-    public byte[] screenshot() throws IOException {
-        File screenshot = Screenshots.getLastScreenshot();
-        return screenshot == null ? null : Files.toByteArray(screenshot);
+    @Test(description = "Delete repository.", priority = 2)
+    public void deleteRepoTest() {
+        loginPage = open("/login", LoginPage.class);
+        mainPage = loginPage.logIn(email, pass);
+        repoPage = mainPage.typeAndClickRepoByName(uniqueId);
+        settingsPage = repoPage.clickOnSettingsBtn();
+        settingsPage.deleteRepoByUI(userID + "/" + repoName + uniqueId);
+        assertThat(mainPage.isRepoURLDisappear(repoName + uniqueId)).as("Repo is still in the list.").isTrue();
     }
 }

@@ -6,6 +6,8 @@
             <class name="UITests.UITests">
                 <methods>
                     <include name="loginTest"/>
+                    <include name="creatingRepoTest"/>
+                    <include name="deleteRepoTest"/>
                 </methods>
             </class>
         </classes>
