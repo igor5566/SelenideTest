@@ -22,6 +22,7 @@ public class BaseTest {
         Configuration.browser = driverName;
         Configuration.baseUrl = "https://github.com";
         Configuration.startMaximized = true;
+        Configuration.headless = true; //for jenkins
         Configuration.timeout = timeWait;
         uniqueId = setUniqueId();
     }
