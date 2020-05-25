@@ -23,6 +23,7 @@ public class BaseTest {
         Configuration.baseUrl = "https://github.com";
         Configuration.startMaximized = true;
         Configuration.headless = true; //for jenkins
+        Configuration.browserSize = "1366x768";
         Configuration.timeout = timeWait;
         uniqueId = setUniqueId();
     }
