@@ -21,9 +21,9 @@ public class BaseTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         Configuration.browser = driverName;
         Configuration.baseUrl = "https://github.com";
-        Configuration.startMaximized = true;
-        Configuration.headless = true; //for jenkins
-        Configuration.browserSize = "1366x768";
+        //Configuration.startMaximized = true;
+        Configuration.headless = true; //for Jenkins
+        Configuration.browserSize = "1366x768"; //for Jenkins
         Configuration.timeout = timeWait;
         uniqueId = setUniqueId();
     }
