@@ -2,6 +2,8 @@ package UITests;
 
 import base.BaseTest;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
@@ -23,7 +25,7 @@ public class UITests extends BaseTest {
     private RepoPage repoPage;
     private SettingsPage settingsPage;
 
-    @BeforeMethod
+    @AfterMethod
     public void clearUp() {
         clearBrowserCookies();
         clearBrowserCache();
