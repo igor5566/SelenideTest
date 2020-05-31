@@ -8,6 +8,7 @@
                     <include name="loginTest"/>
                     <include name="creatingRepoTest"/>
                     <include name="deleteRepoTest"/>
+                    <include name="clearUp"/>
                 </methods>
             </class>
             <class name="tests.APITests.GitHubAPItests">

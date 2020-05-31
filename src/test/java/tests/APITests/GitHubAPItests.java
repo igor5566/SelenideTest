@@ -9,13 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class GitHubAPItests {
 
     private String date;
     private String uniqueID;
-    private String token = "Bearer 4856c92cf82ddc960a7d0f4438ed0725504ddc32";
+    private String token = "Bearer 605fe9db8ae0aba46c88e9414bd17a7f9a76fab8";
     private String email = "volkoff5566@gmail.com";
     private final String baseURI = "https://api.github.com";
     private RequestSpecification requestSpec;
