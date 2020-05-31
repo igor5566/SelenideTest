@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
-import static core.utils.ConfigUtils.timeWait;
+import static core.ConfigManager.timeWait;
 
 public class CreateRepoPage {
 

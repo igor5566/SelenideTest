@@ -1,4 +1,4 @@
-package core.utils;
+package core;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Slf4j
-public abstract class ConfigUtils {
+public abstract class ConfigManager {
     public static String email;
     public static String pass;
     public static String driverName;
@@ -94,7 +94,7 @@ public abstract class ConfigUtils {
         Properties properties = new Properties();
         String file;
         try {
-            file = Objects.requireNonNull(ConfigUtils.class.getClassLoader().getResource(envName)).getFile();
+            file = Objects.requireNonNull(ConfigManager.class.getClassLoader().getResource(envName)).getFile();
             properties.load(new FileInputStream(new File(file)));
         } catch (NullPointerException ex) {
             log.error(ex.getMessage());

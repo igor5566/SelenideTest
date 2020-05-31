@@ -3,11 +3,18 @@
 
     <test name="First">
         <classes>
-            <class name="UITests.UITests">
+            <class name="tests.UITests.UITests">
                 <methods>
                     <include name="loginTest"/>
                     <include name="creatingRepoTest"/>
                     <include name="deleteRepoTest"/>
+                </methods>
+            </class>
+            <class name="tests.APITests.GitHubAPItests">
+                <methods>
+                    <include name="settingUp"/>
+                    <include name="userLoginVerify"/>
+                    <include name="createNewRepoWithAPI"/>
                 </methods>
             </class>
         </classes>

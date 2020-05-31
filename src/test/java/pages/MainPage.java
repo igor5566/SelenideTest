@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
-import static core.utils.ConfigUtils.timeWait;
+import static core.ConfigManager.timeWait;
 
 @Slf4j
 public class MainPage {

@@ -8,8 +8,8 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.Date;
 
-import static core.utils.ConfigUtils.driverName;
-import static core.utils.ConfigUtils.timeWait;
+import static core.ConfigManager.driverName;
+import static core.ConfigManager.timeWait;
 
 @Slf4j
 public class BaseTest {
